@@ -112,13 +112,13 @@
         $("#header").click(function() {
             $("#dinners-list").empty();
 
-            let meals = ["Stir Fry", "Veg Lasagne", "Burgers", "Fish Fingers, Mash & Beans"];
+            let meals = ["Stir Fry", "Veg Lasagne", "Burgers", "Fish Fingers, Mash & Beans", "Pizza","Pie","Curry"];
 
-            let snacks = ["Crisps", "Cereal Bars", "Peanuts", "Sausage Rolls", "Yoghurts"];
+            let snacks = ["Crisps", "Cereal Bars", "Peanuts", "Sausage Rolls", "Yoghurts", "Flapjacks", "Biscuits"];
 
-            let deserts = ["Ice Cream", "Brownies Mix", "Cookie Mix", "Cake"];
+            let deserts = ["Ice Cream", "Brownies Mix", "Cookie Mix", "Cake","Crumble"];
 
-            let juices = ["Orange Juice", "Ribena", "Coca-Cola", "Fanta", "Lucozade"];
+            let juices = ["Orange Juice", "Ribena", "Coca-Cola", "Fanta", "Lucozade","Ginger Beer", "Apple Juice", "Fruit Shoots"];
 
 
             /* ADD MEALS TITLE AND LIST */
@@ -141,7 +141,7 @@
             }
             /* ADD JUICES TITLE AND LIST */
             $("#dinners-list").append("<li class='label' id='juices-label'>Juices 🎲</li>");
-            for (i = 0; i < 5; i++) {
+            for (i = 0; i < 3; i++) {
                 $("#dinners-list").append("<li class='list-item'>" + juices[Math.floor(Math.random() * juices.length)] + "</li>");
                 console.log(Math.floor(Math.random() * juices.length));
             }
