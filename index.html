@@ -11,56 +11,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
         body {
-            background: -webkit-linear-gradient(top, rgb(136, 199, 201) 58%, rgb(202, 232, 235) 100%);
-            background: -moz-linear-gradient(top, rgb(136, 199, 201) 58%, rgb(202, 232, 235) 100%);
-            background: -ms-linear-gradient(top, rgb(136, 199, 201) 58%, rgb(202, 232, 235) 100%);
-            background: -o-linear-gradient(top, rgb(136, 199, 201) 58%, rgb(202, 232, 235) 100%);
-            background: linear-gradient(top, rgb(136, 199, 201) 58%, rgb(202, 232, 235) 100%);
-            overflow-x: hidden;
-        }
-
-        .paper::before {
-            content: '';
-            position: absolute;
-            width: 4px;
-            top: 0;
-            left: 30px;
-            bottom: 0;
-            border: 1px solid;
-            border-color: transparent #efe4e4;
-        }
-
-        .paper {
-            font: normal 12px/1.5 sans-serif, "Lucida Grande", arial, sans-serif;
-            width: 100%;
-            height: 100%;
-            margin: 0 auto;
-            padding: 6px 55px 4px 42px;
-            position: relative;
-            bottom: 10px;
-            right: 10px;
-            color: #444;
-            line-height: 20px;
-            background: #fff;
-            background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
-            background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-            background: -moz-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-            background: -ms-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-            background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-            background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
-            -webkit-background-size: 100% 20px;
-            -moz-background-size: 100% 20px;
-            -ms-background-size: 100% 20px;
-            -o-background-size: 100% 20px;
-            background-size: 100% 20px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-            width: 316px;
-            height: 1056px;
+            font-family: sans-serif;
+            text-align:center;
+            ,argin:0;
+            padding:0;
         }
 
         textarea {
@@ -74,17 +28,13 @@
             line-height: 20px;
         }
 
-        .head {
-            background-color: #FFF;
-            min-height: 40px;
-        }
-
         #header {
             position: relative;
             left: 10px;
             top: 10px;
-            font-size: 300%;
-            font: normal "Lucida Grande", arial, sans-serif;
+            font-size: 200%;
+            margin:0;
+            padding:0;
         }
 
         .label {
@@ -94,59 +44,104 @@
             margin: 10px;
             margin-left: -15px;
         }
+        .list-item {
+            list-style:none;
+            margin-left:-24px;
+            background-color:pink;
+            border-radius:5px;
+            margin-top:0.5em;
+        }
     </style>
 </head>
 
 <body>
 
-    <section class="paper">
 
-        <article class="head">
-            <h1 id="header">Shopping List 🎲</h1>
-        </article>
-        <ul id="dinners-list">
-        </ul>
+    <div class="head">
+        <h1 id="header">Shopping List 🎲</h1>
+    </div>
+    <ul id="dinners-list">
+    </ul>
     </section>
 
     <script>
+        let meals = ["Stir Fry", "Veg Lasagne", "Burgers", "Fish Fingers, Mash & Beans", "Roast", "Pie", "Fajitas", "Jacket Potato", "Scrambled Eggs, Bacon Toast", "Omelette", "Pulled Pork Wraps", "Veg Wraps", "Toad-in-the-hole", "Sausage Casarole"];
+
+        let snacks = ["Crisps", "Cereal Bars", "Peanuts", "Sausage Rolls", "Yoghurts", "Hummus & Carrots", "Raisins", "Peanut & Fruit", "Hot Cross Buns", "Chocolate Croissants", "Cookies", "Biscuits", "Strawberries", "Pineapple", "Mango", "Apples", "Kiwis", "Haribos", "Vol Au Vents"];
+
+        let lunches = ["Part-baked Rolls", "Bagels", "Rolls", "Fish Finger Wraps", "Croissants", "Beans On Toast", "Hotdogs", "Quiche", "Pizza", "Doughballs"]
+
+        let deserts = ["Ice Cream", "Brownies Mix", "Cookie Mix", "Cakes", "Fruit Salad", "Meringue", "Cream Cakes", "Profiteroles", "Crumble", "Nutella pastry", "Banana Split"];
+
+
         $("#header").click(function() {
+            
             $("#dinners-list").empty();
-            $(".head").animate({fontSize:"60%"},1000);
-            let meals = ["Stir Fry", "Veg Lasagne", "Burgers", "Fish Fingers, Mash & Beans", "Pizza","Pie","Curry"];
+            $(".head").animate({
+                fontSize: "60%",
+                opacity: "0"
+            }, 300, function() {
+                $("#header").html("Roll Again 🎲");
+                $(".head").animate({
+                    opacity: "1"
+                }, 300);
+            });
 
-            let snacks = ["Crisps", "Cereal Bars", "Peanuts", "Sausage Rolls", "Yoghurts", "Flapjacks", "Biscuits"];
+            getMeals();
+            getLunches();
+            getSnacks();
+            getDeserts();
 
-            let deserts = ["Ice Cream", "Brownies Mix", "Cookie Mix", "Cake","Crumble"];
-
-            let juices = ["Orange Juice", "Ribena", "Coca-Cola", "Fanta", "Lucozade","Ginger Beer", "Apple Juice", "Fruit Shoots"];
-
-
-            /* ADD MEALS TITLE AND LIST */
-            $("#dinners-list").append("<li class='label' id='meals-label'>Meals 🎲</li>");
-            for (i = 0; i < 5; i++) {
-                $("#dinners-list").append("<li class='list-item'>" + meals[Math.floor(Math.random() * meals.length)] + "</li>");
-                console.log(Math.floor(Math.random() * meals.length));
-            }
-            /* ADD SNACKS TITLE AND LIST */
-            $("#dinners-list").append("<li class='label' id='snacks-label'>Snacks 🎲</li>");
-            for (i = 0; i < 5; i++) {
-                $("#dinners-list").append("<li class='list-item'>" + snacks[Math.floor(Math.random() * snacks.length)] + "</li>");
-                console.log(Math.floor(Math.random() * snacks.length));
-            }
-            /* ADD DESERTs TITLE AND LIST */
-            $("#dinners-list").append("<li class='label' id='deserts-label'>Deserts 🎲</li>");
-            for (i = 0; i < 5; i++) {
-                $("#dinners-list").append("<li class='list-item'>" + deserts[Math.floor(Math.random() * deserts.length)] + "</li>");
-                console.log(Math.floor(Math.random() * deserts.length));
-            }
-            /* ADD JUICES TITLE AND LIST */
-            $("#dinners-list").append("<li class='label' id='juices-label'>Juices 🎲</li>");
-            for (i = 0; i < 3; i++) {
-                $("#dinners-list").append("<li class='list-item'>" + juices[Math.floor(Math.random() * juices.length)] + "</li>");
-                console.log(Math.floor(Math.random() * juices.length));
-            }
+            $(".meals-item").on("click", function(event) {
+                $(this).html(meals[Math.floor(Math.random() * meals.length)]);
+            });
+            $(".lunches-item").on("click", function(event) {
+                $(this).html(lunches[Math.floor(Math.random() * meals.length)]);
+            });
+            $(".snacks-item").on("click", function(event) {
+                $(this).html(snacks[Math.floor(Math.random() * meals.length)]);
+            });
+            $(".deserts-item").on("click", function(event) {
+                $(this).html(deserts[Math.floor(Math.random() * meals.length)]);
+            });
 
         });
+
+        function getMeals() {
+            /* ADD MEALS TITLE AND LIST */
+            $("#dinners-list").append("<li class='label' id='meals-label'>Meals </li>");
+            for (i = 0; i < 5; i++) {
+                $("#dinners-list").append("<li class='list-item meals-item'>" + meals[Math.floor(Math.random() * meals.length)] + "</li>");
+                console.log(Math.floor(Math.random() * meals.length));
+            }
+        }
+
+        function getLunches() {
+            /* ADD LUNCHES TITLE AND LIST */
+            $("#dinners-list").append("<li class='label' id='lunches-label'>Lunches </li>");
+            for (i = 0; i < 5; i++) {
+                $("#dinners-list").append("<li class='list-item lunches-item'>" + lunches[Math.floor(Math.random() * lunches.length)] + "</li>");
+                console.log(Math.floor(Math.random() * lunches.length));
+            }
+        }
+
+        function getSnacks() {
+            /* ADD SNACKS TITLE AND LIST */
+            $("#dinners-list").append("<li class='label' id='snacks-label'>Snacks </li>");
+            for (i = 0; i < 4; i++) {
+                $("#dinners-list").append("<li class='list-item snacks-item'>" + snacks[Math.floor(Math.random() * snacks.length)] + "</li>");
+                console.log(Math.floor(Math.random() * snacks.length));
+            }
+        }
+
+        function getDeserts() {
+            /* ADD DESERTs TITLE AND LIST */
+            $("#dinners-list").append("<li class='label' id='deserts-label'>Deserts </li>");
+            for (i = 0; i < 3; i++) {
+                $("#dinners-list").append("<li class='list-item deserts-item'>" + deserts[Math.floor(Math.random() * deserts.length)] + "</li>");
+                console.log(Math.floor(Math.random() * deserts.length));
+            }
+        }
     </script>
 </body>
 
